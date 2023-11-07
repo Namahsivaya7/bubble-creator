@@ -10,7 +10,7 @@ export default function Addingqtys() {
     return (
         <Box
             sx={{
-                width: 500,
+                width: 1000,
                 maxWidth: '100%',
             }}
         >

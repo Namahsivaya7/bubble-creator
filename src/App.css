@@ -1,0 +1,17 @@
+body {
+  /* display: flex; */
+  justify-content: center;
+  background: #e6e8f7;
+  height: 100%;
+}
+
+.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+  width: 300px;
+}
+
+/* .css-i4bv87-MuiSvgIcon-root {
+  margin-top: 24px;
+} */
+Link{
+  text-decoration: none;
+}

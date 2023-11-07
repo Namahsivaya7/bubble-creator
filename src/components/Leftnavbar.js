@@ -4,6 +4,8 @@ import ReorderIcon from "@mui/icons-material/Reorder";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import { Grid, List, ListItem, Typography, anchor } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from "react-router-dom";
+import Settings from "./Settings";
 
 export default function Leftnavbar() {
     const [opening, setOpening] = useState(false);
@@ -20,10 +22,10 @@ export default function Leftnavbar() {
             <ReorderIcon onClick={openingHandler} />
             <Drawer open={opening} onClose={onClose} >
                 <div style={{ display: "flex" }}>
-                    <p style={{marginTop:"25px"}}>
+                    <p style={{ marginTop: "25px" }}>
                         <WaterDropIcon style={{ fill: "rgb(35 137 219)" }} />
                     </p>
-                    <p style={{marginTop:"0"}}>
+                    <p style={{ marginTop: "0" }}>
                         <h2>Bubbles</h2>
 
                         <p style={{ marginTop: "-15px", fontSize: 10 }}>Water Can Traker</p>
@@ -31,19 +33,19 @@ export default function Leftnavbar() {
                 </div>
                 <List>
                     <ListItem>
-                        <Typography >Home</Typography>
+                        <Link to="/" style={{ textDecoration: 'none', color: "black" }}><Typography >Home</Typography></Link>
                     </ListItem>
                     <ListItem>
-                        <Typography>History</Typography>
+                        <Link to="/history" style={{ textDecoration: 'none', color: "black" }}> <Typography>History</Typography></Link>
                     </ListItem>
                     <ListItem>
-                        <Typography>Transactions</Typography>
+                        <Link to="/transactions" style={{ textDecoration: 'none', color: "black" }}><Typography>Transactions</Typography></Link>
                     </ListItem>
                     <ListItem>
-                        <Typography>Settings</Typography>
+                        <Link to='/Settings' style={{ textDecoration: 'none', color: "black" }}> <Typography>Settings</Typography></Link>
                     </ListItem>
                     <ListItem>
-                        <Typography>Advanced</Typography>
+                    <Link to='/Advanced' style={{ textDecoration: 'none', color: "black" }}> <Typography>Advanced</Typography></Link>
                     </ListItem>
                 </List>
             </Drawer>
