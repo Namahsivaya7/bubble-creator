@@ -47,8 +47,10 @@ export default function Home() {
 
     const dispatch = useDispatch();
     const waterCans = useSelector((state) => state.water.waterCans);
-    // const price = useSelector((state) => state.water.waterCans);
-    console.log(waterCans);
+    const price = useSelector((state) => state.water.price);
+   
+    const perday = useSelector((state) => state.water.perday);
+    console.log(price);
     return (
         <Box sx={{ margin: "70px auto" }} >
             <Grid><Leftnavbar /></Grid>
@@ -56,25 +58,25 @@ export default function Home() {
             <Grid container style={{ gap: "40px 40px", justifyContent: "center" }}>
                 <Grid item xs={2}>
                     <Link to="history" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper elevation={3} /><CalendarMonthIcon style={{ margin: "20px 0 0 20px", fill: "#a92586" }} />
-                        <p style={{ textAlign: "center" }}><b>{waterCans.length}</b><WaterDropIcon style={{ fill: "rgb(33 135 214)", paddingTop: "10px" }} /><p>This month</p></p>
+                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{waterCans.length}</b><WaterDropIcon style={{ fill: "rgb(33 135 214)", paddingTop: "10px" }} /><p>This month</p></p>
                     </Paper></Link>
                     {<Outlet />}
                 </Grid>
 
                 <Grid item xs={2}>
                     <Link to="history" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper /> <InsertInvitationIcon style={{ margin: "20px 0 0 20px", fill: "#8923d0" }} />
-                        <p style={{ textAlign: "center" }}><b>{(waterCans.length / 30).toFixed(1)}</b><WaterDropIcon style={{ fill: "rgb(33 135 214)" }} /><p>Day</p></p></Paper></Link>
+                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>0</b><WaterDropIcon style={{ fill: "rgb(33 135 214)" }} /><p>Day</p></p></Paper></Link>
                 </Grid>
             </Grid>
             <Grid container style={{ gap: "40px 40px", margin: "40px 0", justifyContent: 'center' }}>
                 <Grid item xs={2}>
                     <Paper style={{ height: "200px", borderRadius: "5px" }}><Paper /><OpacityIcon style={{ margin: "20px 0 0 20px", fill: "rgb(33 135 214)" }} />
-                        <p style={{ textAlign: "center" }}><b>0 L</b><p>Person / Day</p></p></Paper>
+                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{perday.toFixed(1)} L</b><p>Person / Day</p></p></Paper>
                 </Grid>
 
                 <Grid item xs={2}>
                     <Link to="/Transactions" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper /> <AccountBalanceWalletIcon style={{ margin: "20px 0 0 20px", fill: "rgb(45 201 136)" }} />
-                        <p style={{ textAlign: "center" }}><b>0 ₹</b><p>Balance</p></p>
+                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{price} ₹</b><p>Balance</p></p>
                     </Paper></Link>
                 </Grid>
             </Grid>

@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: 0,
   waterCans: [],
-  price:[],
+  price: 0,
+  perday: 0,
 };
 
 const Watercancount = createSlice({
@@ -11,17 +12,19 @@ const Watercancount = createSlice({
   initialState,
   reducers: {
     addWaterCan: (state, action) => {
-      const { waterCapacity, price  } = action.payload;
+      const { waterCapacity, price, perday } = action.payload;
       state.waterCans = [
         ...state.waterCans,
-        { capacity: waterCapacity, price },
+        { capacity: waterCapacity, price, perday: waterCapacity },
       ];
       state.capacity += waterCapacity;
-      state.balance += price;
+      state.price -= price;
+      state.perday += waterCapacity / 30;
     },
+
   },
 
-  
+
 });
 
 // Action creators are generated for each case reducer function
