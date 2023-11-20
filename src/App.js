@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Settings from './components/Settings';
 import Transactions from './components/Transactions';
 import Advanced from './components/Advanced';
+import ThisMonth from './components/ThisMonthhistory';
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />}></Route>
-          <Route path="/history" element={<History />}></Route>
-          <Route path="/Settings" element={<Settings />}></Route>
-        <Route path='/transactions' element={<Transactions/>}></Route>
-        <Route path='/Advanced' element={<Advanced/>}></Route>
+        <Route path="/history" element={<History />}></Route>
+        <Route path="/thisMonthhistory" element={<ThisMonth />}></Route>
+        <Route path="/Settings" element={<Settings />}></Route>
+        <Route path='/transactions' element={<Transactions />}></Route>
+        <Route path='/Advanced' element={<Advanced />}></Route>
       </Routes>
     </div>
   );

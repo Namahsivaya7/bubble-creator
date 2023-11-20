@@ -3,31 +3,50 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: 0,
   waterCans: [],
-  price: 0,
-  perday: 0,
+  recordPayments: { payment: 20, date: new Date() },
+  transactions: [],
+  balance: 0,
+
+  settings: { canCapacity: 0, pricePerCan: 0, familyStrength: 0 },
 };
 
-const Watercancount = createSlice({
+const watercancount = createSlice({
   name: "water",
   initialState,
   reducers: {
     addWaterCan: (state, action) => {
-      const { waterCapacity, price, perday } = action.payload;
+      const { capacity, price, date } = action.payload;
       state.waterCans = [
         ...state.waterCans,
-        { capacity: waterCapacity, price, perday: waterCapacity },
+        { capacity, price, date },
       ];
-      state.capacity += waterCapacity;
-      state.price -= price;
-      state.perday += waterCapacity / 30;
+      state.balance -= price;
     },
 
+    recordPayment: (state, action) => {
+      const { date, payment } = action.payload;
+
+      state.transactions = [...state.transactions, { payment, date }];
+
+      state.balance += payment;
+    },
+
+    updateSettings: (state, action) => {
+      const { canCapacity, pricePerCan, familyStrength } = action.payload;
+
+      state.settings.canCapacity = canCapacity;
+      state.settings.pricePerCan = pricePerCan;
+      state.settings.familyStrength = familyStrength;
+    },
+
+    edit: (state, action) => {
+      state.water.canCapacity = action.payload.canCapacity;
+      state.water.pricePerCan = action.payload.pricePerCan;
+    },
   },
-
-
 });
 
 // Action creators are generated for each case reducer function
-export const { addWaterCan } = Watercancount.actions;
-
-export default Watercancount.reducer;
+export const { addWaterCan, recordPayment, updateSettings, edit } = watercancount.actions;
+// export const { data, setDate } = watercancount.actions;
+export default watercancount.reducer;

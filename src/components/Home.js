@@ -15,13 +15,17 @@ import Addingqtys from "./Addingqtys";
 import Leftnavbar from "./Leftnavbar";
 import TextField from '@mui/material/TextField';
 import History from "./History";
+import Advanced from "./Advanced";
+import thisMonthhistory from "./ThisMonthhistory";
+import Settings from "./Settings";
+import Transactions from "./Transactions";
 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Link, Outlet } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addWaterCan } from "./redux-components/Watercancount";
+import { addWaterCan, updateSettings } from "./redux-components/Watercancount";
 import { Balance } from "@mui/icons-material";
 // import { increment } from "./redux/CountSlice";
 // import { increment } from "../redux/CountSlice";
@@ -47,17 +51,28 @@ export default function Home() {
 
     const dispatch = useDispatch();
     const waterCans = useSelector((state) => state.water.waterCans);
-    const price = useSelector((state) => state.water.price);
-   
-    const perday = useSelector((state) => state.water.perday);
-    console.log(price);
+    const balance = useSelector((state) => state.water.balance);
+    // const perday = useSelector((state) => state.water.PerDay);
+    // const day = useSelector((state) => state.water.day);
+
+
+    const capacity = useSelector((state) => state.water.settings.canCapacity);
+    const pricePerCan = useSelector((state) => state.water.settings.pricePerCan);
+    const familyStrength = useSelector((state) => state.water.settings.familyStrength);
+
+
+    const personPerDayvalue = waterCans.length * (capacity / (new Date().getDate() * familyStrength));
+    const dayValue = ((waterCans.length) / new Date().getDate());
+
+
+
     return (
         <Box sx={{ margin: "70px auto" }} >
             <Grid><Leftnavbar /></Grid>
 
             <Grid container style={{ gap: "40px 40px", justifyContent: "center" }}>
                 <Grid item xs={2}>
-                    <Link to="history" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper elevation={3} /><CalendarMonthIcon style={{ margin: "20px 0 0 20px", fill: "#a92586" }} />
+                    <Link to="thisMonthhistory" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper elevation={3} /><CalendarMonthIcon style={{ margin: "20px 0 0 20px", fill: "#a92586" }} />
                         <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{waterCans.length}</b><WaterDropIcon style={{ fill: "rgb(33 135 214)", paddingTop: "10px" }} /><p>This month</p></p>
                     </Paper></Link>
                     {<Outlet />}
@@ -65,18 +80,18 @@ export default function Home() {
 
                 <Grid item xs={2}>
                     <Link to="history" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper /> <InsertInvitationIcon style={{ margin: "20px 0 0 20px", fill: "#8923d0" }} />
-                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>0</b><WaterDropIcon style={{ fill: "rgb(33 135 214)" }} /><p>Day</p></p></Paper></Link>
+                        <p style={{ textAlign: "center" }} ><b style={{ fontSize: 24 }}>{dayValue.toFixed(1)}</b><WaterDropIcon style={{ fill: "rgb(33 135 214)" }} /><p>Day</p></p></Paper></Link>
                 </Grid>
             </Grid>
             <Grid container style={{ gap: "40px 40px", margin: "40px 0", justifyContent: 'center' }}>
                 <Grid item xs={2}>
                     <Paper style={{ height: "200px", borderRadius: "5px" }}><Paper /><OpacityIcon style={{ margin: "20px 0 0 20px", fill: "rgb(33 135 214)" }} />
-                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{perday.toFixed(1)} L</b><p>Person / Day</p></p></Paper>
+                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{personPerDayvalue.toFixed(1)} </b><b style={{ color: "rgb(33 135 214)" }}>L</b><p>Person / Day</p></p></Paper>
                 </Grid>
 
                 <Grid item xs={2}>
                     <Link to="/Transactions" style={{ textDecoration: 'none' }}><Paper style={{ height: "200px", borderRadius: "5px" }}><Paper /> <AccountBalanceWalletIcon style={{ margin: "20px 0 0 20px", fill: "rgb(45 201 136)" }} />
-                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{price} ₹</b><p>Balance</p></p>
+                        <p style={{ textAlign: "center" }}><b style={{ fontSize: 24 }}>{balance} ₹</b><p>Balance</p></p>
                     </Paper></Link>
                 </Grid>
             </Grid>
@@ -85,9 +100,13 @@ export default function Home() {
                     onClick={() =>
                         dispatch(
                             addWaterCan({
-                                waterCapacity: 20,
+                                capacity: 20,
+                                waterCans: [],
+                                perday: 0,
+
                                 price: 10,
-                                date: new Date(),
+                                date: new Date().toDateString(),
+
                             })
                         )
                     }>

@@ -1,12 +1,23 @@
-import  React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Box, Grid, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import BloodtypeIcon from '@mui/icons-material/Bloodtype';
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from 'react-redux';
 
 
 export default function Addingqtys() {
-    
+
+    const dispatch = useDispatch();
+    const [data, setData] = useState({
+        canCapacity: 0,
+        pricePerCan: 0,
+    });
+    const handleChange = (event) => {
+        const { canCapacity, pricePerCan } = event.target.value;
+        setData({ ...data, canCapacity, pricePerCan });
+    };
+
     return (
         <Box
             sx={{

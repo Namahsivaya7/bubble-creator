@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Grid, Button } from '@mui/material/';
-// import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField';
 import BloodtypeIcon from '@mui/icons-material/Bloodtype';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -44,7 +44,8 @@ export default function Settings() {
                     <Grid container sx={{ marginTop: "50px", gap: "15px" }}>
                         <Grid item xs={12}>
                             <FormControl fullWidth sx={{ m: 1, background: "white" }}>
-                                <InputLabel htmlFor="outlined-adornment-amount" onChange={(e) => setCanCapacity(e.target.value)} value={canCapacity}>Can capacity (Litres)</InputLabel>
+                                <InputLabel htmlFor="outlined-adornment-amount" onChange={(e) => setCanCapacity(e.target.value)}
+                                    value={canCapacity}>Can capacity (Litres)</InputLabel>
                                 <OutlinedInput
                                     id="outlined-adornment-amount"
                                     startAdornment={<InputAdornment position="start"><LocalMallIcon sx={{ fill: "rgb(42 42 209)" }} /></InputAdornment>}
@@ -53,8 +54,9 @@ export default function Settings() {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth sx={{ m: 1, background: "white" }} value={pricePerCan}>
-                                <InputLabel htmlFor="outlined-adornment-amount" onChange={(e) => setPricePerCan(e.target.value)} value={pricePerCan}>Price per can</InputLabel>
+                            <FormControl fullWidth sx={{ m: 1, background: "white" }}>
+                                <InputLabel htmlFor="outlined-adornment-amount" onChange={(e) => setPricePerCan(e.target.value)}
+                                    value={pricePerCan}>Price per can</InputLabel>
                                 <OutlinedInput
                                     id="outlined-adornment-amount"
                                     startAdornment={<InputAdornment position="start"><SellIcon sx={{ fill: 'rgb(0 128 0)' }} /></InputAdornment>}
@@ -64,7 +66,8 @@ export default function Settings() {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth sx={{ m: 1, background: "white" }}>
-                                <InputLabel htmlFor="outlined-adornment-amount" onChange={(e) => setFamilyStrength(e.target.value)} value={familyStrength}>Family strength</InputLabel>
+                                <InputLabel htmlFor="outlined-adornment-amount" onChange={(e) => setFamilyStrength(e.target.value)}
+                                    value={familyStrength}>Family strength</InputLabel>
                                 <OutlinedInput
                                     id="outlined-adornment-amount"
                                     startAdornment={<InputAdornment position="start"><FavoriteIcon sx={{ fill: "red" }} /></InputAdornment>}
